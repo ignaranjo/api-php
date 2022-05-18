@@ -27,6 +27,17 @@ class detalleModelo extends mainModel
         //return $sentencia->fetchAll();
 
     }
+    protected static function getProdcto_imagenes($id)
+    {
+        $query = "SELECT * FROM producto_imagenes pri WHERE pri.id_producto = :ID";
+
+        $sql = mainModel::conectar()->prepare($query);
+        $sql->bindParam(":ID", $id);
+        $sql->execute();
+        return $sql;
+        //return $sentencia->fetchAll();
+
+    }
     protected static function getProductoDetalle_terminacion($id)
     {
         $query = "SELECT id, nombre
@@ -111,6 +122,14 @@ class detalleModelo extends mainModel
         $sql = mainModel::conectar()->prepare($query);
         $sql->bindParam(":ID_PRODUCTO", $id_producto);
         $sql->bindParam(":ID_ESPESOR", $id_espesor);
+        $sql->execute();
+        return $sql;
+    }
+   
+    protected static function getProductoDetalle_color()
+    {
+        $query = "SELECT * FROM producto_color";
+        $sql = mainModel::conectar()->prepare($query);
         $sql->execute();
         return $sql;
     }

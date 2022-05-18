@@ -20,6 +20,8 @@ class Producto
     public $detalle;
     public $terminacionList;
     public $espesorList;
+    public $imagenesList;
+    public $colorList;
 }
 class Terminacion
 {
@@ -49,14 +51,22 @@ class detalleControlador extends detalleModelo
 
         $terminacionResp = detalleModelo::getProductoDetalle_terminacion($id);
         $terminacionParse = $terminacionResp->fetchAll(PDO::FETCH_CLASS, 'Terminacion');
+        
+        $imagenesResp = detalleModelo::getProdcto_imagenes($id);
+        $imagenesParse = $imagenesResp->fetchAll(PDO::FETCH_ASSOC);
 
         $espesorResp = detalleModelo::getProductoDetalle_espesor($id);
         $espesorParse = $espesorResp->fetchAll(PDO::FETCH_ASSOC);
+        
+        $colorResp = detalleModelo::getProductoDetalle_color($id);
+        $colorParse = $colorResp->fetchAll(PDO::FETCH_ASSOC);
 
         $producto = new Producto();
         $producto->detalle = $dataParse;
         $producto->terminacionList = $terminacionParse;
         $producto->espesorList = $espesorParse;
+        $producto->imagenesList = $imagenesParse;
+        $producto->colorList = $colorParse;
         echo json_encode($producto);
     }
 

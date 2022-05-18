@@ -12,7 +12,6 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 $pm = new detalleControlador();
 if ($method == 'GET' && isset($_GET['idProducto']) && isset($_GET['idEspesor'])) {
-    //return $pm->getTermination_controlador($_GET['id']);
     return $pm->getDetalleOpciones($_GET['idProducto'], $_GET['idEspesor']);
 }
 ?>
