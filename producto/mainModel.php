@@ -1,8 +1,6 @@
 <?php
-include_once './config/SERVER.php';
+include_once CONFIG_PATH.'/SERVER.php';
 
-//home/cdi66189/public_html/carrito-compras/api/producto/mainModel.php
-//home/cdi66189/public_html/carrito-compras/api/producto/config/SERVER.PHP
 class mainModel
 {
 
