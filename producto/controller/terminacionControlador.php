@@ -1,5 +1,5 @@
 <?php
-require_once "./mainModel.php";
+require_once ROOT_PATH.'/mainModel.php';
 
 class terminacionControlador extends mainModel
 {

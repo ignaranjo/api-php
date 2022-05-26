@@ -29,7 +29,8 @@ class Terminacion
     public $nombre;
 }
 
-class Opcion{
+class Opcion
+{
     public $id_espesor;
     public $opcion;
     public $espesor;
@@ -51,13 +52,13 @@ class detalleControlador extends detalleModelo
 
         $terminacionResp = detalleModelo::getProductoDetalle_terminacion($id);
         $terminacionParse = $terminacionResp->fetchAll(PDO::FETCH_CLASS, 'Terminacion');
-        
+
         $imagenesResp = detalleModelo::getProdcto_imagenes($id);
         $imagenesParse = $imagenesResp->fetchAll(PDO::FETCH_ASSOC);
 
         $espesorResp = detalleModelo::getProductoDetalle_espesor($id);
         $espesorParse = $espesorResp->fetchAll(PDO::FETCH_ASSOC);
-        
+
         $colorResp = detalleModelo::getProductoDetalle_color($id);
         $colorParse = $colorResp->fetchAll(PDO::FETCH_ASSOC);
 
@@ -133,5 +134,37 @@ class detalleControlador extends detalleModelo
 
 
         echo json_encode($obj);
+    }
+
+    public static function insertProduct($data)
+    {
+        foreach ($data as $producto) {
+            //print_r($producto);
+            $resp = detalleModelo::insertarProducto_cotizacion($producto);
+            print_r($resp);
+            /* if ($resp) {
+                echo 'insertado con existo';
+            } else {
+                echo 'fallo el insert';
+            } */
+        }
+
+        //echo 'insertado con existo';
+        
+    }
+    public static function eliminarProduct($uuid)
+    {
+        $resp = detalleModelo::eliminarProducto_cotizacion($uuid);
+        if ($resp) {
+            echo 'insertado con existo';
+        } else {
+            echo 'fallo el insert' . $uuid;
+        }
+    }
+    public static function getProduct($idSesion)
+    {
+        $resp = detalleModelo::getProducto_cotizacion($idSesion);
+        $respParse = $resp->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($respParse);
     }
 }

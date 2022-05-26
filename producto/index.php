@@ -7,8 +7,10 @@ header('Content-Type: application/json; charset=utf-8');
 /*
 header('Authorization: Bearer <token>');*/
 
+include_once($_SERVER['DOCUMENT_ROOT'] . '/api/producto/dirs.php');
+include_once ROOT_PATH . '/loginControlador.php';
+
 $method = $_SERVER['REQUEST_METHOD'];
-include_once './loginControlador.php';
 $pm = new loginControlador();
 //var_dump(isset($_GET['id']));  
 if ($method == 'GET' && isset($_GET['id'])) {
@@ -21,4 +23,3 @@ if ($method == 'GET') {
 }
 //$request = $_SERVER['REQUEST_URI'];
 //$arr_request = explode('/', $request);
-?>

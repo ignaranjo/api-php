@@ -1,5 +1,5 @@
 <?php
-include_once "productoModelo.php";
+include_once MODEL_PATH.'/productoModelo.php';
 
 class productoControlador extends loginModelo
 {
