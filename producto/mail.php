@@ -18,7 +18,7 @@ if ($method == 'POST') {
     $producto = $data['productos'];
     $contacto = $data['contacto'];
 
-    $to = "ignacio.inl@gmail.com";
+    $to = "ignacio.inl@gmail.com, bastian.garcia@dicoinchile.cl, oscar.novoa@dicoinchile.cl";
     $subject = "Asunto del email";
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";

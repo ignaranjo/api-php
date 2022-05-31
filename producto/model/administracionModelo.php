@@ -1,7 +1,7 @@
 <?php
 require_once ROOT_PATH.'/mainModel.php';
 
-class detalleModelo extends mainModel
+class administracionModelo extends mainModel
 {
 
     /* ------------- Modelo iniciar session ------------- */
@@ -129,62 +129,6 @@ class detalleModelo extends mainModel
     protected static function insertarProducto_cotizacion($data)
     {
         //echo json_encode($data);
-        /* $query = "INSERT INTO carrito_cotizador
-        (
-            id_sesion, 
-            uuid, 
-            producto_id, 
-            producto_largo, 
-            producto_cantidad, 
-            producto_terminacion, 
-            producto_espesor, 
-            producto_cumbrera_medida, 
-            producto_cumbrera, 
-            producto_anticondensante, 
-            producto_anticondensante_medida, 
-            producto_perforable, 
-            producto_perforable_medida, 
-            producto_curvo, 
-            producto_curvo_medida, 
-            color
-        ) 
-        VALUES (
-            :id_sesion, 
-            :uuid, 
-            :producto_id, 
-            :largo, 
-            :cantidad, 
-            :terminacion, 
-            :espesor, 
-            :cumbrera_medida, 
-            :cumbrera, 
-            :anticondensante, 
-            :anticondensante_medida, 
-            :perforable, 
-            :perforable_medida, 
-            :curvo, 
-            :curvo_medida, 
-            :color
-           )";
-        $sql = mainModel::conectar()->prepare($query);
-        $sql->bindParam(":id_sesion", $data['id_sesion']);
-        $sql->bindParam(":uuid", $data['uuid']);
-        $sql->bindParam(":producto_id", $data['idProducto']);
-        $sql->bindParam(":largo", $data['medida']);
-        $sql->bindParam(":cantidad", $data['cantidad']);
-        $sql->bindParam(":terminacion", $data['terminacion']);
-        $sql->bindParam(":espesor", $data['espesor']);
-        $sql->bindParam(":cumbrera_medida", $data['cumbreraMedida']);
-        $sql->bindParam(":cumbrera", $data['cumbrera']);
-        $sql->bindParam(":anticondensante", $data['anticondensante']);
-        $sql->bindParam(":anticondensante_medida", $data['anticondensanteMedida']);
-        $sql->bindParam(":perforable", $data['perforable']);
-        $sql->bindParam(":perforable_medida", $data['perforableMedida']);
-        $sql->bindParam(":curvo", $data['curvo']);
-        $sql->bindParam(":curvo_medida", $data['curvoMedida']);
-        $sql->bindParam(":color", $data['color']); */
-        
-        //echo json_encode($data);
         $query = "INSERT INTO carrito_cotizador(
             id_sesion, 
             uuid, 
@@ -266,6 +210,7 @@ class detalleModelo extends mainModel
         
         $sql->execute();
         //print_r($sql->errorInfo());
+        //print_r($sql);
         return $sql;
     }
     protected static function eliminarProducto_cotizacion($uuid)

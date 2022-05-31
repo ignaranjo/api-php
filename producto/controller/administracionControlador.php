@@ -1,42 +1,7 @@
 <?php
-require_once MODEL_PATH . "/detalleModelo.php";
+require_once MODEL_PATH . "/administracionModelo.php";
 
-class ProductoDetalle
-{
-    //Predefine Here
-    public $id;
-    public $nombre;
-    public $categoria;
-    public $img;
-
-    /* public function profileLink()
-    {
-         return sprintf('<a href="/profile/%s">%s</a>',$this->id,$this->username);
-    } */
-}
-
-class Producto
-{
-    public $detalle;
-    public $terminacionList;
-    public $espesorList;
-    public $imagenesList;
-    public $colorList;
-}
-class Terminacion
-{
-    public $id;
-    public $nombre;
-}
-
-class Opcion
-{
-    public $id_espesor;
-    public $opcion;
-    public $espesor;
-}
-
-class detalleControlador extends detalleModelo
+class administracionControlador extends administracionModelo
 {
 
 
@@ -46,20 +11,20 @@ class detalleControlador extends detalleModelo
         $sql->bindParam(":ID", $id);
         $sql->execute(); */
 
-        $resp = detalleModelo::getDetalleProducto($id);
+        $resp = administracionModelo::getDetalleProducto($id);
         $dataParse = $resp->fetchObject('ProductoDetalle');
         //$dataParse = $resp->fetchAll(PDO::FETCH_CLASS, 'ProductoDetalle');
 
-        $terminacionResp = detalleModelo::getProductoDetalle_terminacion($id);
+        $terminacionResp = administracionModelo::getProductoDetalle_terminacion($id);
         $terminacionParse = $terminacionResp->fetchAll(PDO::FETCH_CLASS, 'Terminacion');
 
-        $imagenesResp = detalleModelo::getProdcto_imagenes($id);
+        $imagenesResp = administracionModelo::getProdcto_imagenes($id);
         $imagenesParse = $imagenesResp->fetchAll(PDO::FETCH_ASSOC);
 
-        $espesorResp = detalleModelo::getProductoDetalle_espesor($id);
+        $espesorResp = administracionModelo::getProductoDetalle_espesor($id);
         $espesorParse = $espesorResp->fetchAll(PDO::FETCH_ASSOC);
 
-        $colorResp = detalleModelo::getProductoDetalle_color($id);
+        $colorResp = administracionModelo::getProductoDetalle_color($id);
         $colorParse = $colorResp->fetchAll(PDO::FETCH_ASSOC);
 
         $producto = new Producto();
@@ -77,7 +42,7 @@ class detalleControlador extends detalleModelo
     /* ---------------- Modelo obtener espesor de productos ---------------- */
     public static function getTermination_controlador($id_producto)
     {
-        $resp = detalleModelo::getTerminationModel($id_producto);
+        $resp = administracionModelo::getTerminationModel($id_producto);
         //$dataParse = $resp->fetchAll(PDO::FETCH_ASSOC);
         return json_encode($resp);
     }
@@ -104,22 +69,22 @@ class detalleControlador extends detalleModelo
         $perforableParse = null;
         $curvoParse = null;
 
-        $cumbrera = detalleModelo::getProductoDetalle_cumbrera($id_producto, $id_espesor);
+        $cumbrera = administracionModelo::getProductoDetalle_cumbrera($id_producto, $id_espesor);
         if ($cumbrera->rowCount() > 0) {
             $cumbreraParse = $cumbrera->fetchObject('Opcion');
         }
 
-        $anticondensante = detalleModelo::getProductoDetalle_anticondensante($id_producto, $id_espesor);
+        $anticondensante = administracionModelo::getProductoDetalle_anticondensante($id_producto, $id_espesor);
         if ($anticondensante->rowCount() > 0) {
             $anticondensanteParse = $anticondensante->fetchObject('Opcion');
         }
 
-        $perforable = detalleModelo::getProductoDetalle_perforable($id_producto, $id_espesor);
+        $perforable = administracionModelo::getProductoDetalle_perforable($id_producto, $id_espesor);
         if ($perforable->rowCount() > 0) {
             $perforableParse = $perforable->fetchObject('Opcion');
         }
 
-        $curvo = detalleModelo::getProductoDetalle_curvo($id_producto, $id_espesor);
+        $curvo = administracionModelo::getProductoDetalle_curvo($id_producto, $id_espesor);
         if ($curvo->rowCount() > 0) {
             $curvoParse = $curvo->fetchObject('Opcion');
         }
@@ -135,29 +100,9 @@ class detalleControlador extends detalleModelo
 
         echo json_encode($obj);
     }
-
-    public static function insertProduct($data)
-    {
-        //foreach ($data as $producto) {
-            //print_r($producto);
-            $resp = detalleModelo::insertarProducto_cotizacion($data);
-            //print_r($resp);
-            /* if ($resp) {
-                echo 'insertado con existo';
-            } else {
-                echo 'fallo el insert';
-            } */
-        //}
-
-        header("HTTP/1.1 200 OK");
-        $obj = new stdClass();
-        $obj->respuesta = "insertado con existo";
-        echo json_encode($obj);
-        
-    }
     public static function eliminarProduct($uuid)
     {
-        $resp = detalleModelo::eliminarProducto_cotizacion($uuid);
+        $resp = administracionModelo::eliminarProducto_cotizacion($uuid);
         if ($resp) {
             echo 'insertado con existo';
         } else {
@@ -166,7 +111,7 @@ class detalleControlador extends detalleModelo
     }
     public static function getProduct($idSesion)
     {
-        $resp = detalleModelo::getProducto_cotizacion($idSesion);
+        $resp = administracionModelo::getProducto_cotizacion($idSesion);
         $respParse = $resp->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($respParse);
     }

@@ -4,18 +4,22 @@ header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 header('Content-Type: application/json; charset=utf-8');
-/*
-header('Authorization: Bearer <token>');*/
+/*header('Authorization: Bearer <token>');*/
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/api/producto/dirs.php');
-include_once ROOT_PATH . '/loginControlador.php';
+include_once CONTROLLER_PATH . '/categoriaControlador.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
-$pm = new loginControlador();
+$pm = new categoriaControlador();
 //var_dump(isset($_GET['id']));  
 if ($method == 'GET' && isset($_GET['id'])) {
     //return $pm->getProduct($_GET['id']);
     return $pm->getProduct($_GET['id']);
+}
+
+if ($method == 'GET' && isset($_GET['categoria'])) {
+    //return $pm->getProduct($_GET['id']);
+    return $pm->getProductCategoria_controller($_GET['categoria']);
 }
 
 if ($method == 'GET') {
